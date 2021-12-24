@@ -1317,7 +1317,7 @@ function readShareCode() {
           console.log(`${$.name} 已清除 sgh`)
         } else {
           if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
+            console.log(`sgh 检查 随机取个${randomCount}码`)
             //data = JSON.parse(data);
           }
         }

@@ -43,10 +43,10 @@ let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
 const inviteCodes = [
-  'AXDgNYKNLs51h24hm7ZK-w==@2pMYXE95BIkCIGcO6UzTpQ==@DgHnSIl_Xks49TJjxzo7nw==@UO68abNzUTGatLzR4Z4RTg==@xJctChTp3ru2blH_WwFopg==@W2y011egxw55xNDYP8Xpww==@NRjbnfYENRVL9QSnLZZNrA==@dmgVOhr4JdUp1CG78ohkWw==@6nURqZ5tze71d9TbZGQg3Q==',
-  'AXDgNYKNLs51h24hm7ZK-w==@2pMYXE95BIkCIGcO6UzTpQ==@DgHnSIl_Xks49TJjxzo7nw==@UO68abNzUTGatLzR4Z4RTg==@xJctChTp3ru2blH_WwFopg==@W2y011egxw55xNDYP8Xpww==@NRjbnfYENRVL9QSnLZZNrA==@dmgVOhr4JdUp1CG78ohkWw==@6nURqZ5tze71d9TbZGQg3Q==',
-  'AXDgNYKNLs51h24hm7ZK-w==@2pMYXE95BIkCIGcO6UzTpQ==@DgHnSIl_Xks49TJjxzo7nw==@UO68abNzUTGatLzR4Z4RTg==@xJctChTp3ru2blH_WwFopg==@W2y011egxw55xNDYP8Xpww==@NRjbnfYENRVL9QSnLZZNrA==@dmgVOhr4JdUp1CG78ohkWw==@6nURqZ5tze71d9TbZGQg3Q==',
-  'AXDgNYKNLs51h24hm7ZK-w==@2pMYXE95BIkCIGcO6UzTpQ==@DgHnSIl_Xks49TJjxzo7nw==@UO68abNzUTGatLzR4Z4RTg==@xJctChTp3ru2blH_WwFopg==@W2y011egxw55xNDYP8Xpww==@NRjbnfYENRVL9QSnLZZNrA==@dmgVOhr4JdUp1CG78ohkWw==@6nURqZ5tze71d9TbZGQg3Q==',
+  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
+  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
+  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
+  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
 ];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.tuanIds = [];
@@ -1024,12 +1024,7 @@ async function tuanActivity() {
   }
 }
 async function joinLeaderTuan() {
-  let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_updateFactoryTuanId.json')
-  if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateFactoryTuanId.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
-    await $.wait(1000)
-    res = await updateTuanIdsCDN('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateFactoryTuanId.json');
-  }
+  let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/leastfrog/updateTeam/master/shareCodes/jd_updateFactoryTuanId.json')
   $.authorTuanIds = [...(res && res.tuanIds || [])]
   if ($.authorTuanIds && $.authorTuanIds.length) {
     for (let tuanId of $.authorTuanIds) {

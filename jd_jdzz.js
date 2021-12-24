@@ -40,8 +40,8 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  `S9KUiH11Mq1bSKBo@S5KkcRh9P9FbRKUygl_UJcg@StvV3SBcQ8Vw@S5KkcEV9ThDGWdWGw0K5u@S5KkcRktN8lyBdEj1kaQMdw@Sa3LolJe5IPhP9aNJQlGD@S5KkcR0pM91aBIhmgxf9bcA@S5KkcREwR_VXRIB78kvRYcg@S5KkcRE8b9QGEIEz0nKRbJw`,
-  `S9KUiH11Mq1bSKBo@S5KkcRh9P9FbRKUygl_UJcg@StvV3SBcQ8Vw@S5KkcEV9ThDGWdWGw0K5u@S5KkcRktN8lyBdEj1kaQMdw@Sa3LolJe5IPhP9aNJQlGD@S5KkcR0pM91aBIhmgxf9bcA@S5KkcREwR_VXRIB78kvRYcg@S5KkcRE8b9QGEIEz0nKRbJw`,
+  `1@2`,
+  `1@2`,
 ]
 let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000);
 !(async () => {
@@ -139,11 +139,11 @@ function getUserInfo() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            // if (data.data.shareTaskRes) {
-            //   console.log(`\n【京东账号${$.index}（${$.nickName || $.UserName}）的${$.name}好友互助码】${data.data.shareTaskRes.itemId}\n`);
-            // } else {
-            //   console.log(`\n\n已满5人助力或助力功能已下线,故暂时无${$.name}好友助力码\n\n`)
-            // }
+             if (data.data.shareTaskRes) {
+               console.log(`\n【京东账号${$.index}（${$.nickName || $.UserName}）的${$.name}好友互助码】${data.data.shareTaskRes.itemId}\n`);
+             } else {
+               console.log(`\n\n已满5人助力或助力功能已下线,故暂时无${$.name}好友助力码\n\n`)
+             }
           }
         }
       } catch (e) {
@@ -228,15 +228,15 @@ async function helpFriends() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `https://code.chiang.fun/api/v1/jd/jdzz/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${$.name} 已清除 sgh`)
         } else {
           if (data) {
-            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
+            console.log(`sgh 检查 随机取个${randomCount}码`)
+            //data = JSON.parse(data);
           }
         }
       } catch (e) {

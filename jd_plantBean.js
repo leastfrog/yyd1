@@ -34,9 +34,9 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'lsvcdmfjrraodhrrvhcfiz7iye@olmijoxgmjuty7323i6ijrv5tdhd32kefogty5i@gf2njfitdloxldekzam2flrji4@mq65ksgdrkobhiyvkoqfi7ff7i5ac3f4ijdgqji@wkmb7lejrmax2avk7bszvx7s74@4npkonnsy7xi3acvl3goi4ga5gpmpv2km4yj3di@rj7s6mzlk7uognpgua34bszhyf4cpqqtj5vfhta@olmijoxgmjutyif5p35uuja6gwp2ulsp2x6fjoi@dzfuhp3b2fz7mnj5ndxxqsradgg5bsrhuof2mbq',
+  'wf4yuuedd6qovje3io6y6diawe@olmijoxgmjutzuwat43rrl7lgzuiv3fljdwyuna@nkvdrkoit5o646s675smft7l3sbvbbqbdubynii@wqfkuldhykwgpoluqd445eqj6q5ac3f4ijdgqji@a2tvhovnf4ayvt7f477764yvz43h7wlwy7o5jii@dbzkpnrqj3xmai25a4jmpmmgymyj7jckeko3nmy@olmijoxgmjutyikjupp5kklxac33csucn5o5h5a@olmijoxgmjutzszdlt64v33rrx4ovg2phzgrzoi@mojpkgspwzyuxidf2seoufgzjrjbxhhmipe2f5q',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'lsvcdmfjrraodhrrvhcfiz7iye@olmijoxgmjuty7323i6ijrv5tdhd32kefogty5i@gf2njfitdloxldekzam2flrji4@mq65ksgdrkobhiyvkoqfi7ff7i5ac3f4ijdgqji@wkmb7lejrmax2avk7bszvx7s74@4npkonnsy7xi3acvl3goi4ga5gpmpv2km4yj3di@rj7s6mzlk7uognpgua34bszhyf4cpqqtj5vfhta@olmijoxgmjutyif5p35uuja6gwp2ulsp2x6fjoi@dzfuhp3b2fz7mnj5ndxxqsradgg5bsrhuof2mbq',
+  'wf4yuuedd6qovje3io6y6diawe@olmijoxgmjutzuwat43rrl7lgzuiv3fljdwyuna@nkvdrkoit5o646s675smft7l3sbvbbqbdubynii@wqfkuldhykwgpoluqd445eqj6q5ac3f4ijdgqji@a2tvhovnf4ayvt7f477764yvz43h7wlwy7o5jii@dbzkpnrqj3xmai25a4jmpmmgymyj7jckeko3nmy@olmijoxgmjutyikjupp5kklxac33csucn5o5h5a@olmijoxgmjutzszdlt64v33rrx4ovg2phzgrzoi@mojpkgspwzyuxidf2seoufgzjrjbxhhmipe2f5q',
 ]
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
@@ -541,15 +541,15 @@ async function plantBeanIndex() {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `http://transfer.nz.lu/bean`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: ``, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${$.name} 已清除 sgh`)
         } else {
           if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
+            console.log(`sgh 检查 随机取个${randomCount}码`)
+            //data = JSON.parse(data);
           }
         }
       } catch (e) {
