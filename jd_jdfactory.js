@@ -624,7 +624,7 @@ function readShareCode() {
           console.log(`${$.name} sgh 已清除`)
         } else {
           if (data) {
-            console.log(`sgh 检查 随机取个${randomCount}码`)
+            console.log(`sgh 检查 随机取${randomCount}个码`)
             //data = JSON.parse(data);
           }
         }
