@@ -31,14 +31,14 @@ const inviteCodes = [
 const ZLC = !(process.env.JD_JOIN_ZLC && process.env.JD_JOIN_ZLC === 'false')
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : ''
 const randomCount = $.isNode() ? 20 : 5;
-function oc(fn, defaultVal) {//optioanl chaining
+function oc(fn, defaultVal) {// 可选链接
   try {
     return fn()
   } catch (e) {
     return undefined
   }
 }
-function nc(val1, val2) {//nullish coalescing
+function nc(val1, val2) {// 无效合并
   return val1 != undefined ? val1 : val2
 }
 if ($.isNode()) {
@@ -152,19 +152,6 @@ function getTaskDetail(taskId = '') {
                 // console.log('好友助力码：' + oc(() => data.data.result.taskVos[0].assistTaskDetailVo.taskToken))
                 // ***************************
                 // 报告运行次数
-                if (ZLC) {
-                  if (oc(() => data.data.result.taskVos[0].assistTaskDetailVo.taskToken)) {
-                    $.code = data.data.result.taskVos[0].assistTaskDetailVo.taskToken
-                    for (let k = 0; k < 5; k++) {
-                      try {
-                        await runTimes()
-                        break
-                      } catch (e) {
-                      }
-                      await $.wait(Math.floor(Math.random() * 10 + 3) * 1000)
-                    }
-                  }
-                }
                 // ***************************
 
               }
