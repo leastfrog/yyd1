@@ -4,17 +4,17 @@
 =================================Quantumultx=========================
 [task_local]
 #京喜购物返红包助力
-20 * * * * jx_aid_cashback.js, tag=京喜购物返红包助力, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+11 22 * * * jx_aid_cashback.js, tag=京喜购物返红包助力, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =================================Loon===================================
 [Script]
-cron "20 * * * *" script-path=jx_aid_cashback.js,tag=京喜购物返红包助力
+cron "11 22 * * *" script-path=jx_aid_cashback.js,tag=京喜购物返红包助力
 
 ===================================Surge================================
-京喜购物返红包助力 = type=cron,cronexp="20 * * * *",wake-system=1,timeout=3600,script-path=jd_big_winner.js
+京喜购物返红包助力 = type=cron,cronexp="11 22 * * *",wake-system=1,timeout=3600,script-path=jd_big_winner.js
 
 ====================================小火箭=============================
-京喜购物返红包助力 = type=cron,script-path=jx_aid_cashback.js, cronexpr="20 * * * *", timeout=3600, enable=true
+京喜购物返红包助力 = type=cron,script-path=jx_aid_cashback.js, cronexpr="11 22 * * *", timeout=3600, enable=true
  */
 let common = require("./function/common");
 let $ = new common.env('京喜购物返红包助力');
