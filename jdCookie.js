@@ -96,6 +96,4 @@ let nameConfig = process.env.ShareCodeConfigName
 let envName = process.env.ShareCodeEnvName
 if (nameConfig && envName) {
     SetShareCodesEnv(nameConfig, envName)
-} else {
-    console.debug(`友情提示：您的脚本正常运行中`)
 }
