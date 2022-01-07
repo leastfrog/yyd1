@@ -1,9 +1,9 @@
 /*
-集“年味卡”，享年货盛宴
+年货盛宴 春节集福攻略
 
-https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity?activityId=cd2022n4ci22tlj1s2w3245u1mk&shareUuid=31e5b0ffe4554307a9c5edf87a29ee7d
+https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity?activityId=cd20220105fff606x19uj4vijetkg
 */
-const $ = new Env("集“年味卡”，享年货盛宴");
+const $ = new Env("年货盛宴 春节集福攻略");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
@@ -29,12 +29,12 @@ if ($.isNode()) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         return;
     }
-    // authorCodeList = await getAuthorCodeList('https://gitee.com/fatelight/code/raw/master/lzdz1_customized.json')
-    // if($.getAuthorCodeListerr === false){
-    //     authorCodeList = [
-    //         '9df288c6b072416984e60e5f62ab8459',
-    //     ]
-    // }
+    //authorCodeList = await getAuthorCodeList('https://gitee.com/fatelight/code/raw/master/lzdz1.json')
+    if($.getAuthorCodeListerr === false){
+        authorCodeList = [
+            //'a98348e17928460fb2e40a29a08eabcf',
+        ]
+    }
     // console.log(authorCodeList)
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
@@ -57,19 +57,19 @@ if ($.isNode()) {
             $.bean = 0;
             $.ADID = getUUID('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 1);
             $.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-            authorCodeList = [
-                'c80a140add90424dbd358ef30f52a538',
-                //'31e5b0ffe4554307a9c5edf87a29ee7d',
-            ]
+            // authorCodeList = [
+            //     'fa3a636d994046b2af3e2bb14eb6cce6',
+            //     'a98348e17928460fb2e40a29a08eabcf',
+            // ]
             // $.authorCode = authorCodeList[random(0, authorCodeList.length)]
             $.authorCode = ownCode ? ownCode : authorCodeList[random(0, authorCodeList.length)]
             $.authorNum = `${random(1000000, 9999999)}`
             $.randomCode = random(1000000, 9999999)
-            $.activityId = 'cd2022n4ci22tlj1s2w3245u1mk'
-            $.activityShopId = '1000003443'
-            $.activityUrl = `https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity?activityId=cd2022n4ci22tlj1s2w3245u1mk&shareUuid=c80a140add90424dbd358ef30f52a538&adsource=null&shareuserid4minipg=null&shopid=${$.activityShopId}&lng=00.000000&lat=00.000000&sid=&un_area=`
+            $.activityId = 'cd20220105fff606x19uj4vijetkg'
+            $.activityShopId = '1000077335'
+            $.activityUrl = `https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity?activityId=cd2022n4ci22tlj1s2w3245u1mk&adsource=null&shareuserid4minipg=null&shopid=${$.activityShopId}&lng=00.000000&lat=00.000000&sid=&un_area=`
             await member();
-            await $.wait(1000)
+            await $.wait(2000)
             if ($.bean > 0) {
                 message += `\n【京东账号${$.index}】${$.nickName || $.UserName} \n       └ 获得 ${$.bean} 京豆。`
             }
@@ -104,7 +104,7 @@ async function member() {
             console.log("去助力 -> "+$.authorCode)
             await task('common/accessLogWithAD', `venderId=${$.activityShopId}&code=99&pin=${encodeURIComponent($.secretPin)}&activityId=${$.activityId}&pageUrl=${$.activityUrl}&subType=app&adSource=null`, 1);
             await task('wxActionCommon/getUserInfo', `pin=${encodeURIComponent($.secretPin)}`, 1)
-            await task('play/monopoly/getContent', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&pinImg=&nick=${encodeURIComponent($.pin)}&cjyxPin=&cjhyPin=&shareUuid=c80a140add90424dbd358ef30f52a538&adsource=null`,1)
+            await task('play/monopoly/getContent', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&pinImg=&nick=${encodeURIComponent($.pin)}&cjyxPin=&cjhyPin=&adsource=null`,1)
             await task('taskact/common/drawContent', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}`)
             await $.wait(1000)
             $.log("关注店铺")
@@ -138,22 +138,25 @@ async function member() {
             console.log('去助力 -> ' + $.authorCode)
             await getFirstLZCK()
             await $.wait(1000)
-            await task('play/monopoly/getAssistStatus', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&shareUuid=c80a140add90424dbd358ef30f52a538&actorUuid=${$.actorUuid}`,1)
+            await task('play/monopoly/getAssistStatus', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&actorUuid=${$.actorUuid}`,1)
             await getFirstLZCK()
             await $.wait(1000)
-            await task('play/monopoly/assist', `pin=${encodeURIComponent($.secretPin)}&activityId=${$.activityId}&shareUuid=c80a140add90424dbd358ef30f52a538&actorUuid=${$.actorUuid}`,1)
+            await task('play/monopoly/assist', `pin=${encodeURIComponent($.secretPin)}&activityId=${$.activityId}&actorUuid=${$.actorUuid}`,1)
             $.log(`>>> 任务`)
+            await $.wait(1000)
             await task('play/monopoly/doTasks', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&actorUuid=${$.actorUuid}&taskType=0`,1)
+            await $.wait(1000)
             await task('play/monopoly/doTasks', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&actorUuid=${$.actorUuid}&taskType=21`,1)
             for (let i in $.browseGoodList) {
                 console.log($.browseGoodList[i]['goodsCode'])
+                await $.wait(1000)
                 await task('play/monopoly/doTasks', `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&actorUuid=${$.actorUuid}&taskType=5&value=${$.browseGoodList[i]['goodsCode']}`,1)
             }
             
             $.log(`>>> 抽奖`)
             
             for (let index = 0; index < 5; index++) {
-                await $.wait(1000)
+                await $.wait(2000)
                 await task('play/monopoly/activeDraw', `activityId=${$.activityId}&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.secretPin)}&drawType=2`,1)
             }
             // await task('play/monopoly/drawCard', `activityId=${$.activityId}&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.secretPin)}`,1)
@@ -173,6 +176,7 @@ function task(function_id, body, isCommon = 0) {
                         if (data.result) {
                             switch (function_id) {
                                 case 'dz/common/getSimpleActInfoVo':
+                                    // console.log(data)
                                     $.jdActivityId = data.data.jdActivityId;
                                     $.venderId = data.data.venderId;
                                     $.activityType = data.data.activityType;
@@ -233,8 +237,6 @@ function task(function_id, body, isCommon = 0) {
                         } else {
                             $.log(JSON.stringify(data))
                         }
-                    } else {
-                        $.log("京东没有返回数据")
                     }
                 }
             } catch (error) {
