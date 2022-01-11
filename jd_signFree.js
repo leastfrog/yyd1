@@ -89,8 +89,8 @@ function query() {
                     $.signFreeOrderInfoList = data.data.signFreeOrderInfoList
                     if (data.success == true) {
                         if (!data.data.signFreeOrderInfoList) {
-                            console.log("没有需要签到的商品,请到京东极速版[签到免单]购买商品");
-                            msg.push("没有需要签到的商品,请到京东极速版[签到免单]购买商品")
+                            console.log("没有需要签到的商品");
+                            msg.push("没有需要签到的商品")
                         } else {
                             $.signFreeOrderInfoList = data.data.signFreeOrderInfoList
                             console.log("脚本也许随时失效,请注意");
