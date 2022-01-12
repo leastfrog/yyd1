@@ -7,8 +7,8 @@
 // 同一个京东账号的好友互助码用@符号隔开,不同京东账号之间用&符号或者换行隔开,下面给一个示例
 // 如: 京东账号1的shareCode1@京东账号1的shareCode2&京东账号2的shareCode1@京东账号2的shareCode2
 let shareCodes = [
-  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
-  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
+  //'79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
+  //'79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
 ]
 
 // 从日志获取互助码
