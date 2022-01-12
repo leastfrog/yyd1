@@ -108,7 +108,7 @@ if ($.isNode()) {
   }
   let res = [];
   if(helpFlag){
-    res = []
+    res = await getAuthorShareCode('');
     if(!res){
       res = [];
     }
