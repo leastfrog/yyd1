@@ -43,10 +43,7 @@ let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
 const inviteCodes = [
-  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
-  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
-  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
-  '79LbiScxeUj16DGRuGstmw==@pLiLf-k4-BiUQLcJAHJG7w==@m2I5y9Te15hM1KooRdcyOg==@l02XGts9smlWFk0p6xT_og==@XYaNP5dxUKe11CisXaeLiA==@udr4jqGNuB5WMRAXVx7zjA==@VRX63lPmSGy0Pf0vsIb2vg==@mEh6ey-hM1E0Y5WO8FQejA==@o7W_P9u6rs7da96D-zPvow==',
+  ''
 ];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.tuanIds = [];
@@ -1024,7 +1021,12 @@ async function tuanActivity() {
   }
 }
 async function joinLeaderTuan() {
-  let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/leastfrog/updateTeam/master/shareCodes/jd_updateFactoryTuanId.json')
+  let res = await updateTuanIdsCDN('')
+  if (!res) {
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    await $.wait(1000)
+    res = await updateTuanIdsCDN('');
+  }
   $.authorTuanIds = [...(res && res.tuanIds || [])]
   if ($.authorTuanIds && $.authorTuanIds.length) {
     for (let tuanId of $.authorTuanIds) {
@@ -1351,7 +1353,7 @@ async function showMsg() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `http://transfer.nz.lu/jxfactory`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: ``, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
@@ -1610,7 +1612,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  return new Promise(async resolve => {
+  new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
