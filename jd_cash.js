@@ -27,12 +27,11 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let helpAuthor = true;
+let helpAuthor = false;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = [
-  `f05mL6jkJKNx@eU9YauXjN_pz9mnczyEQ1Q@eU9YM7XpG4FvqTqWkiZi@YF5pL7TjOaB3rwGI@IhM3b-iyY_sl92-6iw@9pq2tFYzsHmhJ_50ynEQ@eU9Yarrmbv8k9mnczydB0g@eU9Yar3mb_9392aHy3Qb3w@ZE9JL7fFMoZzsBKQmiVE@ZEppO7brN6JyrjCCynob3w@IhMxb-y3Z_ku9W26iw@dEprMLnsLKR3rg`,
-  `f05mL6jkJKNx@eU9YauXjN_pz9mnczyEQ1Q@eU9YM7XpG4FvqTqWkiZi@YF5pL7TjOaB3rwGI@IhM3b-iyY_sl92-6iw@9pq2tFYzsHmhJ_50ynEQ@eU9Yarrmbv8k9mnczydB0g@eU9Yar3mb_9392aHy3Qb3w@ZE9JL7fFMoZzsBKQmiVE@ZEppO7brN6JyrjCCynob3w@IhMxb-y3Z_ku9W26iw@dEprMLnsLKR3rg`,
+  ``,
 ]
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -50,7 +49,7 @@ let allMessage = '';
     return;
   }
   await requireConfig()
-  $.authorCode = await getAuthorShareCode('https://raw.githubusercontent.com/leastfrog/updateTeam/master/shareCodes/jd_updateCash.json')
+  $.authorCode = []  //await getAuthorShareCode('')
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -490,11 +489,11 @@ function readShareCode() {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} sgh 已清除`)
+          console.log(`${$.name} 清除 by sgh`)
         } else {
           if (data) {
-            console.log(`sgh 检查 随机取${randomCount}个码`)
-            //data = JSON.parse(data);
+            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+            data = []; //JSON.parse(data);
           }
         }
       } catch (e) {
