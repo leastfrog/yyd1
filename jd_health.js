@@ -24,21 +24,20 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 const notify = $.isNode() ? require('./sendNotify') : "";
 let cookiesArr = [], cookie = "", allMessage = "", message;
 const inviteCodes = [
-  `T0124qgiA1pPtwuACjVfnoaW5kRrbA@T0225KkcRhdIpFKCJx39kKUJdwCjVfnoaW5kRrbA@T0205KkcH0dCiCmeeE63zaJ7CjVfnoaW5kRrbA`,
-  `T0124qgiA1pPtwuACjVfnoaW5kRrbA@T0225KkcRhdIpFKCJx39kKUJdwCjVfnoaW5kRrbA@T0205KkcH0dCiCmeeE63zaJ7CjVfnoaW5kRrbA`,
-  `T0124qgiA1pPtwuACjVfnoaW5kRrbA@T0225KkcRhdIpFKCJx39kKUJdwCjVfnoaW5kRrbA@T0205KkcH0dCiCmeeE63zaJ7CjVfnoaW5kRrbA`,
+  //`T0225KkcRh9P9FbRKUygl_UJcgCjVfnoaW5kRrbA@T0159KUiH11Mq1bSKBoCjVfnoaW5kRrbA@T018v_hzQhwZ8FbUIRib1ACjVfnoaW5kRrbA`,
+  //`T0225KkcRh9P9FbRKUygl_UJcgCjVfnoaW5kRrbA@T0159KUiH11Mq1bSKBoCjVfnoaW5kRrbA@T018v_hzQhwZ8FbUIRib1ACjVfnoaW5kRrbA`,
+  //`T0225KkcRh9P9FbRKUygl_UJcgCjVfnoaW5kRrbA@T0159KUiH11Mq1bSKBoCjVfnoaW5kRrbA@T018v_hzQhwZ8FbUIRib1ACjVfnoaW5kRrbA`,
 ]
-const ZLC = !(process.env.JD_JOIN_ZLC && process.env.JD_JOIN_ZLC === 'false')
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : ''
 const randomCount = $.isNode() ? 20 : 5;
-function oc(fn, defaultVal) {// 可选链接
+function oc(fn, defaultVal) {//optioanl chaining
   try {
     return fn()
   } catch (e) {
     return undefined
   }
 }
-function nc(val1, val2) {// 无效合并
+function nc(val1, val2) {//nullish coalescing
   return val1 != undefined ? val1 : val2
 }
 if ($.isNode()) {
@@ -84,6 +83,10 @@ const JD_API_HOST = "https://api.m.jd.com/";
 
 async function main() {
   try {
+    if (reward) {
+      await getCommodities()
+    }
+
     $.score = 0
     $.earn = false
     await getTaskDetail(-1)
@@ -99,10 +102,6 @@ async function main() {
     await helpFriends()
     await getTaskDetail(22);
     await getTaskDetail(-1)
-
-    if (reward) {
-      await getCommodities()
-    }
 
   } catch (e) {
     $.logErr(e)
@@ -359,7 +358,7 @@ function readShareCode() {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} sgh 已清除`)
+          console.log(`${$.name} 已清除 by sgh`)
         } else {
           if (data) {
             console.log(`sgh 检查 随机取${randomCount}个码`)
