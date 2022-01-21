@@ -65,7 +65,7 @@ if ($.isNode()) {
     return;
   }
   await requestAlgo();
-  //await getActiveId();//自动获取每期拼团活动ID
+  await getActiveId();//自动获取每期拼团活动ID
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -1398,15 +1398,15 @@ function requireConfig() {
   return new Promise(async resolve => {
     // tuanActiveId = $.isNode() ? (process.env.TUAN_ACTIVEID || tuanActiveId) : ($.getdata('tuanActiveId') || tuanActiveId);
     // if (!tuanActiveId) {
-    //   await updateTuanIdsCDN('');
+    //   await updateTuanIdsCDN('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_updateFactoryTuanId.json');
     //   if ($.tuanConfigs && $.tuanConfigs['tuanActiveId']) {
     //     tuanActiveId = $.tuanConfigs['tuanActiveId'];
     //     console.log(`拼团活动ID: 获取成功 ${tuanActiveId}\n`)
     //   } else {
     //     if (!$.tuanConfigs) {
-    //       $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    //       $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateFactoryTuanId.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     //       await $.wait(1000)
-    //       await updateTuanIdsCDN('');
+    //       await updateTuanIdsCDN('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateFactoryTuanId.json');
     //       if ($.tuanConfigs && $.tuanConfigs['tuanActiveId']) {
     //         tuanActiveId = $.tuanConfigs['tuanActiveId'];
     //         console.log(`拼团活动ID: 获取成功 ${tuanActiveId}\n`)
