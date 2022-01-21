@@ -75,7 +75,7 @@ if ($.isNode()) {
     return;
   }
   console.log(`\n===============开始账号内参团===================`);
-  console.log('获取到的内部团ID'+`${$.tuanIds}\n`);
+  console.log('获取到的内部团ID:'+`${$.tuanIds}\n`);
   //打乱CK,再进行参团
   if (!Array.prototype.derangedArray) {Array.prototype.derangedArray = function() {for(var j, x, i = this.length; i; j = parseInt(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);return this;};}
   cookiesArr.derangedArray();
