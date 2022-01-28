@@ -219,7 +219,6 @@ if __name__ == '__main__':
             # 找没卡的
             if all_cardtable[idx][i] == 0:
                 for j in range(len(cks)):
-                	print(all_cardtable[j][i])
                     if all_cardtable[j][i] > 1:
                         id = 768 + i
                         ck_t = cks[j]
