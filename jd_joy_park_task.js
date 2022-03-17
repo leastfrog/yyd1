@@ -183,7 +183,7 @@ message = ""
             $.log("没有助力次数了！");
             break
           } else if (resp.data.helpState === 4) {
-            $.log("这个B助力满了！");
+            $.log("TA助力满了！");
           }
         } else {
           $.log("数据异常 助力失败！\n\n")
