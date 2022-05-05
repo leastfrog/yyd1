@@ -134,15 +134,12 @@ async function bean() {
     }
   }
   // console.log(myMap)
-<<<<<<< HEAD
   // await queryexpirejingdou();//过期京豆
   // await redPacket();//过期红包
   // console.log(`今日收入：${$.todayIncomeBean}个京豆 🐶`);
-=======
   await queryexpirejingdou();//过期京豆
   await redPacket();//过期红包
   // console.log(`昨日收入：${$.incomeBean}个京豆 🐶`);
->>>>>>> parent of 5371daf (u1)
   // console.log(`昨日支出：${$.expenseBean}个京豆 🐶`)
 }
 function TotalBean() {
