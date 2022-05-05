@@ -50,7 +50,7 @@ if ($.isNode()) {
   }
 
   if ($.isNode() && allMessage) {
-    //await notify.sendNotify(`${$.name}`, `${allMessage}`, { url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean` })
+    await notify.sendNotify(`${$.name}`, `${allMessage}`, { url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean` })
   }
 })()
     .catch((e) => {
@@ -134,9 +134,6 @@ async function bean() {
     }
   }
   // console.log(myMap)
-  // await queryexpirejingdou();//过期京豆
-  // await redPacket();//过期红包
-  // console.log(`今日收入：${$.todayIncomeBean}个京豆 🐶`);
   await queryexpirejingdou();//过期京豆
   await redPacket();//过期红包
   // console.log(`昨日收入：${$.incomeBean}个京豆 🐶`);
