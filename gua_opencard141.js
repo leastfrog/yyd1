@@ -28,11 +28,11 @@ All变量适用
 请求太频繁会被黑ip
 过10分钟再执行
 
-cron:30 1 30,1-7 4,5 *
+cron:40 1 30,1-7 4,5 *
 ============Quantumultx===============
 [task_local]
 #4.29~5.7 51景点打卡
-30 1 30,1-7 4,5 * https://raw.githubusercontent.com/smiek2121/scripts/master/gua_opencard141.js, tag=4.29~5.7 51景点打卡, enabled=true
+40 1 30,1-7 4,5 * https://raw.githubusercontent.com/smiek2121/scripts/master/gua_opencard141.js, tag=4.29~5.7 51景点打卡, enabled=true
 
 */
 let guaopencard_addSku = 'false'
