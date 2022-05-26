@@ -224,7 +224,7 @@ if(DisableIndex!=-1){
 	EnableJxMC=false;	
 }
 //京喜工厂
-let EnableJxGC=true;
+let EnableJxGC=false;
 DisableIndex=strDisableList.findIndex((item) => item === "京喜工厂");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭京喜工厂查询");
@@ -232,7 +232,7 @@ if(DisableIndex!=-1){
 }
 
 // 京东工厂
-let EnableJDGC=true;
+let EnableJDGC=false;
 DisableIndex=strDisableList.findIndex((item) => item === "京东工厂");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭京东工厂查询");
@@ -247,7 +247,7 @@ if(DisableIndex!=-1){
 }	
 
 //金融养猪
-let EnablePigPet=true;
+let EnablePigPet=false;
 DisableIndex=strDisableList.findIndex((item) => item === "金融养猪");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭金融养猪查询");
