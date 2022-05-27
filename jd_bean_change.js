@@ -224,7 +224,7 @@ if(DisableIndex!=-1){
 	EnableJxMC=false;	
 }
 //京喜工厂
-let EnableJxGC=false;
+let EnableJxGC=true;
 DisableIndex=strDisableList.findIndex((item) => item === "京喜工厂");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭京喜工厂查询");
@@ -232,7 +232,7 @@ if(DisableIndex!=-1){
 }
 
 // 京东工厂
-let EnableJDGC=false;
+let EnableJDGC=true;
 DisableIndex=strDisableList.findIndex((item) => item === "京东工厂");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭京东工厂查询");
