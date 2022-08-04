@@ -90,8 +90,8 @@ async function appindex(info=false) {
                 return
               }
               $.signMoney = data.data.result.totalMoney;
-               console.log(`您的助力码为${data.data.result.invitedCode}`)
-              console.log(`\n【京东账号${$.index}（${$.UserName}）的好友互助码】${data.data.result.invitedCode}\n`);
+              // console.log(`您的助力码为${data.data.result.invitedCode}`)
+              //console.log(`\n【京东账号${$.index}（${$.UserName}）的好友互助码】${data.data.result.invitedCode}\n`);
               let helpInfo = {
                 'inviteCode': data.data.result.invitedCode,
                 'shareDate': data.data.result.shareDate
