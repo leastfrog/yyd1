@@ -1,6 +1,6 @@
 /*
 明星送好礼
-cron:0 35 18,23 13 9 *
+cron:0 35 18,23 24 9 *
 */
 const $ = new Env('明星送好礼');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -47,10 +47,10 @@ async function main() {
     $.activityInfo = {};
     await takeRequest('showStarGiftInfo');
     if (JSON.stringify($.activityInfo) === '{}') {
-        console.log(`❌获取活动详情失败`);
+        console.log(`获取活动详情失败`);
         return;
     }
-    console.log(`✅获取活动详情成功`);
+    console.log(`获取活动详情成功`);
     $.activityId = $.activityInfo.activityBaseInfo.activityId;
     $.activityName = $.activityInfo.activityBaseInfo.activityName;
     console.log(`当前活动:${$.activityName},ID：${$.activityId}`);
@@ -107,20 +107,6 @@ async function doTask() {
                 }
             }
 
-        }
-        else if ($.oneTask.assignmentType === 7) {
-            let subInfo = $.oneTask.ext.brandMemberList || '';
-            if (subInfo && subInfo[0]) {
-                for (let j = 0; j < subInfo.length; j++) {
-                    $.runInfo = subInfo[j];
-                    if ($.runInfo.status !== 1) {
-                        continue;
-                    }
-                    console.log(`任务：${$.runInfo.shopName || $.runInfo.itemId},去执行`);
-                    await takeRequest('superBrandDoTask', { "source": "star_gift", "activityId": $.activityId, "encryptProjectId": $.encryptProjectId, "encryptAssignmentId": $.oneTask.encryptAssignmentId, "assignmentType": $.oneTask.assignmentType, "itemId": $.runInfo.itemId, "actionType": 0 });
-                    await $.wait(200);
-                }
-            }
         }
     }
 }
@@ -188,11 +174,11 @@ function dealReturn(type, data) {
         case 'superBrandTaskLottery':
             if (data.code === '0' && data.data.bizCode !== 'TK000') {
                 $.runFlag = false;
-                console.log(data.data.bizMsg);
+                console.log(`抽奖次数已用完`);
             } else if (data.code === '0' && data.data.bizCode == 'TK000') {
                 if (data.data && data.data.result && data.data.result.rewardComponent && data.data.result.rewardComponent.beanList) {
                     if (data.data.result.rewardComponent.beanList.length > 0) {
-                        console.log(`🎉获得豆子：${data.data.result.rewardComponent.beanList[0].quantity}`)
+                        console.log(`获得豆子：${data.data.result.rewardComponent.beanList[0].quantity}`)
                     }
                 }
             } else {
