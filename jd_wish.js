@@ -1,18 +1,8 @@
 /*
 众筹许愿池
-活动入口：京东-京东众筹-众筹许愿池
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-===============Quantumultx===============
-[task_local]
-#众筹许愿池
-40 0,11,19 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-================Loon==============
-[Script]
-cron "40 0,11,19 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js,tag=众筹许愿池
-===============Surge=================
-众筹许愿池 = type=cron,cronexp="40 0,11,19 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js
-============小火箭=========
-众筹许愿池 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, cronexpr="40 0,11,19 * * *", timeout=3600, enable=true
+
+40 5,8 * * * jd_wish.js
+
  */
 const $ = new Env('众筹许愿池');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -22,8 +12,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ["1EFRXxg","1EFRWxKuG"];
-let appNameArr = ["1","2"];
+let appIdArr = ["1EFVXyw"];
+let appNameArr = ["年终奖补贴"];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
@@ -39,6 +29,10 @@ if ($.isNode()) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
+	if(appIdArr.length <= 0) {
+		console.log(`\n暂无活动~\n`);
+		return;
+	}
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -47,7 +41,7 @@ if ($.isNode()) {
       $.isLogin = true;
       $.nickName = '';
       message = '';
-      await TotalBean();
+      //await TotalBean();
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -57,11 +51,13 @@ if ($.isNode()) {
         }
         continue
       }
+			
       for (let j = 0; j < appIdArr.length; j++) {
         appId = appIdArr[j]
         appName = appNameArr[j]
         console.log(`\n开始第${j + 1}个活动：${appName}\n`)
         await jd_wish();
+				await $.wait(2000)
       }
     }
   }
@@ -69,13 +65,8 @@ if ($.isNode()) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage)
   }
-//  let res = await getAuthorShareCode('')
-//  if (!res) {
-//    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-//    await $.wait(1000)
-//    res = await getAuthorShareCode('')
-//  }
-  $.shareCode = [...$.shareCode]
+  let res = await getAuthorShareCode('')
+  $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -115,7 +106,9 @@ if ($.isNode()) {
     })
 async function jd_wish() {
   try {
+		$.hasEnd = false;
     await healthyDay_getHomeData();
+		if($.hasEnd) return;
     await $.wait(2000)
 
     let getHomeDataRes = (await healthyDay_getHomeData(false)).data.result.userInfo
@@ -131,9 +124,12 @@ async function jd_wish() {
     $.canLottery = true
     for (let j = 0; j < forNum && $.canLottery; j++) {
       await interact_template_getLotteryResult()
-      await $.wait(2000)
+			if (j == 9 && $.canLottery) {
+        console.log('抽太多次了，下次再继续吧！');
+        break
+      }
+      await $.wait(3000)
     }
-    if (message) allMessage += `京东账号${$.index} ${$.nickName || $.UserName}\n${appName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`
 
   } catch (e) {
     $.logErr(e)
@@ -142,6 +138,7 @@ async function jd_wish() {
 
 async function healthyDay_getHomeData(type = true) {
   return new Promise(async resolve => {
+    // console.log(taskUrl('healthyDay_getHomeData', { "appId": appId, "taskToken": "", "channelId": 1 }));
     $.post(taskUrl('healthyDay_getHomeData', { "appId": appId, "taskToken": "", "channelId": 1 }), async (err, resp, data) => {
       try {
         if (err) {
@@ -150,30 +147,35 @@ async function healthyDay_getHomeData(type = true) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
+            // console.log(data);
+						if(data.data.bizCode === 0) {
             if (type) {
-                for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
-                  let vo = data.data.result.hotTaskVos[key]
-                  if (vo.status !== 2) {
-                    if (vo.taskType === 13 || vo.taskType === 12) {
-                      console.log(`点击热区`)
+              for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
+                let vo = data.data.result.hotTaskVos[key]
+                if (vo.status !== 2) {
+                  if (vo.taskType === 13 || vo.taskType === 12) {
+                    console.log(`点击热区`)
                     await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
-                    } else {
-                    console.log(`【${vo.taskName}】已完成\n`)
-                    }
-                  }
+										await $.wait(1500)
+                  } else {
+                  console.log(`【${vo.taskName}】已完成\n`)
                 }
+							}	
+							}						
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
                   if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`签到`)
                     await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
+										await $.wait(1500)
                   } else if (vo.taskType === 1) {
                     for (let key of Object.keys(vo.followShopVo)) {
                       let followShopVo = vo.followShopVo[key]
                       if (followShopVo.status !== 2) {
                         console.log(`【${followShopVo.shopName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": followShopVo.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 5) {
@@ -182,6 +184,7 @@ async function healthyDay_getHomeData(type = true) {
                       if (browseShopVo.status !== 2) {
                         console.log(`【${browseShopVo.skuName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": browseShopVo.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 15) {
@@ -190,14 +193,16 @@ async function healthyDay_getHomeData(type = true) {
                       if (productInfoVos.status !== 2) {
                         console.log(`【${productInfoVos.skuName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
-                  } else if (vo.taskType === 3 && vo.shoppingActivityVos) {
-					for (let key of Object.keys(vo.shoppingActivityVos)) {
+                  } else if (vo.taskType === 3) {
+							for (let key of Object.keys(vo.shoppingActivityVos)) {
                       let shoppingActivityVos = vo.shoppingActivityVos[key]
                       if (shoppingActivityVos.status !== 2) {
                         console.log(`【${vo.subTitleName}】`)
                         await harmony_collectScore({ "appId": appId, "taskToken": shoppingActivityVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 8) {
@@ -208,6 +213,7 @@ async function healthyDay_getHomeData(type = true) {
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "1" })
                         await $.wait(vo.waitDuration * 1000)
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 27 && vo.taskId === 18) {
@@ -223,6 +229,7 @@ async function healthyDay_getHomeData(type = true) {
                           await $.wait(vo.waitDuration * 1000)
                         }
                         await harmony_collectScore({ "appId": appId, "taskToken": shoppingActivityVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 14) {
@@ -240,6 +247,10 @@ async function healthyDay_getHomeData(type = true) {
                 }
               }
             }
+					} else {
+              console.log(`黑号，火爆了\n`)
+							$.hasEnd = true;
+						}
           }
         }
       } catch (e) {
