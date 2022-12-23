@@ -1,7 +1,7 @@
 /*
 点点券
 入口：京东APP-领券-左上角领券中心
-35 16 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_necklace_6dy.js
+5 6 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_necklace_6dy.js
 updatetime:2022/12/14 fix
  */
 const $ = new Env('点点券-加密');

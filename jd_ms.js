@@ -2,7 +2,7 @@
 秒秒币
 入口：京东APP 首页秒杀
 只能使用appck运行，签到+任务
-38 9 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_ms.js
+38 5 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_ms.js
 updatetime: 2022-11-24 支持mck
  */
 const $ = new Env('秒秒币-加密');
