@@ -1,6 +1,6 @@
 /*
 助力,8个满，每人有5次助力机会
-12 12 12 12 * jd_zns_help.js
+5 8 * * * jd_zns_help.js
 updatetime:2022/12/27 新增分享任务，组队控制
 */
 const $ = new Env('炸年兽任务助力');

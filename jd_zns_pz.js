@@ -1,7 +1,7 @@
 
 /*
 炸年兽膨胀
-7 7 7 7 7 jd_zns_help.js
+7 20 * * * jd_zns_help.js
 updatetime：2022/12/27
 根据大佬脚本修改 且用且珍惜~
 
