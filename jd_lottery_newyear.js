@@ -1,8 +1,6 @@
 /*
 新年抽奖
 随机执行
-33 9 * * * jd_lottery_newyear.js
-
 */
 const $ = new Env('新年抽奖');
 const notify = $.isNode() ? require('./sendNotify') : '';
