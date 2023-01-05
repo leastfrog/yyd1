@@ -1,6 +1,6 @@
 /*
 定时自定义
-2 20 14 12 * jd_bean_info.js
+2 20 * * * jd_bean_info.js
  */
 
 const $ = new Env('京豆详情统计');
